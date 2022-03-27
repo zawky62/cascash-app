@@ -1,11 +1,13 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace CashcashApp
 {
-
     public class Client
     {
-        private string numClient;
+        private int id;
         private string raisonSociale;
         private string siren;
         private string codeApe;
@@ -14,43 +16,66 @@ namespace CashcashApp
         private string email;
         private int dureeDeplacement;
         private int distanceKm;
-        private List<Materiel> lesMateriels;  // Tous les matériels du client.
-        private ContratMaintenance leContrat;  // peut être nul si le client ne possède pas de contrat
+        private List<Materiel> materiels;  // Tous les matériels du client.
+        private Contrat contrat;  // peut être nul si le client ne possède pas de contrat
 
         public Client()
         {
-            this.numClient="";
-            this.raisonSociale="";
-            this.siren="";
-            this.codeApe="";
-            this.adresse="";
-            this.telClient="";
-            this.email = "";
-            this.dureeDeplacement=0;
-            this.distanceKm=0;
-            this.lesMateriels=new List<Materiel> { };
-            this.leContrat=new ContratMaintenance();
-
-
-        }
-        public List<Materiel> getMateriels()
-        {
-            // Retourne l'ensemble des matériels du client
-            return lesMateriels;
-        }
-
-        public List<Materiel> getMaterielsSousContrat()
+            this.id = 1;
+            this.raisonSociale = "ab";
+            this.siren = "ab";
+            this.codeApe = "ab";
+            this.adresse = "ab";
+            this.telClient = "ab";
+            this.email = "ab";
+            this.dureeDeplacement = 0;
+            this.distanceKm = 0;
+            this.materiels = new List<Materiel> { new Materiel(), new Materiel() };
+            this.contrat = new Contrat();
+        } // TBD
+        public string GetNom() => raisonSociale;
+        public int GetId() => id;
+        public List<Materiel> GetMateriels() => materiels;
+        public List<Materiel> GetMaterielsSousContrat()
         {
             // Retourne l'ensemble des matériels pour lesquels le client a souscrit un contrat de maintenance qui
             // est encore valide (la date du jour est entre la date de signature et la date d’échéance)
-            return lesMateriels;
-        }
-
-        public bool estAssure()
+            List<Materiel> temp = new();
+            foreach (Materiel materiel in GetMateriels())
+            {
+                if (materiel.contrat.EstValide())
+                {
+                    temp.Add(materiel);
+                }
+            }
+            return temp;
+        } // TBD
+        public List<Materiel> GetMaterielsHorsContrat()
         {
-            return false;
+            // Retourne l'ensemble des matériels pour lesquels le client n'a pas souscrit un contrat de maintenance qui
+            // est encore valide (la date du jour est entre la date de signature et la date d’échéance)
+            List<Materiel> temp = new();
+            foreach (Materiel materiel in GetMateriels())
+            {
+                if (!materiel.contrat.EstValide())
+                {
+                    temp.Add(materiel);
+                }
+            }
+            return temp;
+        } // TBD
+        public bool EstAssure()
+        {
             // Retourne vrai si le client est assuré, faux sinon
-        }
+            foreach (Materiel materiel in GetMateriels())
+            {
+                if (materiel.contrat.EstValide())
+                {
+                    return true;
+                }
+            }
+            return false;
+        } // TBD
 
     }
 }
