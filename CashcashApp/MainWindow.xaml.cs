@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,21 @@ namespace CashcashApp
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void bt_open_xml_Click(object sender, RoutedEventArgs e)
+        {
+            Client client = new();
+            string nomFichier = "materielClient" + client.GetId() + ".xml";
+            string emplacement = @"c://fichier.xml";
+            try
+            {
+                System.Diagnostics.Process.Start("explorer.exe", emplacement);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

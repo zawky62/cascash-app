@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Cashcash" Height="450" Width="800">
     <Grid>
-        <TextBlock Text="Ok" />
+        <TextBlock Name="txt" Text="Ok" />
+        <Button Name="bt_open_xml" Content="Voir XML" HorizontalAlignment="Left" Margin="316,181,0,0" VerticalAlignment="Top" Click="bt_open_xml_Click"/>
     </Grid>
 </Window>

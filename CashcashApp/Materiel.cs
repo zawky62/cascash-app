@@ -4,24 +4,36 @@ namespace CashcashApp
 {
     public class Materiel
     {
-        private int numSerie;
-        private DateOnly dateVente;
-        private float prixVente;
-        private string emplacement;
-        private TypeMateriel leType;
+        public int numSerie;
+        public DateOnly dateVente;
+        public DateOnly dateInstallation;
+        public float prixVente;
+        public string emplacement;
+        public Contrat contrat;
+        public Type type;
 
-        public Materiel()
+        public Materiel() // TBD
         {
             this.numSerie = 0;
             this.dateVente = new DateOnly();
+            this.dateInstallation = new DateOnly();
             this.prixVente = 0;
             this.emplacement = "";
-            this.leType = new TypeMateriel();
+            this.contrat = new Contrat();
+            this.type = new Type();
         }
-        public string xmlMateriel()
+        public string XmlMateriel() // TBD
         {
             // Retourne la chaîne correspondant au code XML représentant le matériel (voir annexe).
-            return "";
+            string temp = $"<materiel numSerie=\"{numSerie}\">" +
+                            $"<type reference=\"{type.reference}\" libelle=\"{type.libelle}\"/>" +
+                            $"<date_vente>{dateVente}</date_vente>" +
+                            $"<date_installation>{dateInstallation}</date_installation>" +
+                            $"<prix_vente>{prixVente}</prix_vente>" +
+                            $"<emplacement>\"{emplacement}\"</emplacement>" +
+                            $"<nbJourAvantEcheance>{contrat.GetJoursRestants()}</nbJourAvantEcheance>" +
+                          "</materiel>";
+            return temp;
         }
     }
 }
