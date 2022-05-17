@@ -1,12 +1,13 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using CashcashApp;
 
-namespace cashcashAppTests
+namespace CashcashApp.Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class PersistanceSQLTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void TestPersistanceSQL()
         {
         }
     }
