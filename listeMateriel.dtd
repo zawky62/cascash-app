@@ -1,0 +1,17 @@
+<!DOCTYPE listeMateriel [
+    <!ELEMENT listeMateriel (materiels)>
+    <!ELEMENT materiels (sousContrat?, horsContrat?)>
+    <!ATTLIST materiels idClient CDATA #REQUIRED>
+    <!ELEMENT sousContrat (materiel*)>
+    <!ELEMENT horsContrat (materiel*)>
+    <!ELEMENT materiel (type, date_vente, date_installation, prix_vente?, emplacement, nbJourAvantEcheance?)>
+    <!ATTLIST materiel numSerie CDATA #REQUIRED>
+    <!ELEMENT type (#PCDATA)>
+    <!ATTLIST type reference CDATA #REQUIRED
+                    libelle CDATA #REQUIRED>
+    <!ELEMENT date_vente (#PCDATA)>
+    <!ELEMENT date_installation (#PCDATA)>
+    <!ELEMENT prix_vente (#PCDATA)>
+    <!ELEMENT emplacement (#PCDATA)>
+    <!ELEMENT nbJourAvantEcheance (#PCDATA)>
+]>
