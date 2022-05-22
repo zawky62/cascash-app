@@ -25,11 +25,11 @@ namespace CashcashApp
 
         // NouvelleConnexionBDD démarre une nouvelle connexion avec la BDD et renvoie l'objet GestionMateriel en cas de succès.
         // En cas d'échec, propose de réessayer ou quitter. Si l'utilisateur quitte, renvoie null et arrête le programme.
-        public static PersistanceSQL NouvelleConnexionBDD(string bdd)
+        public static PersistanceSQL NouvelleConnexionBDD(string bdd, string utilisateur, string mdp)
         {
             try
             {
-                BDDConfig info = new(bdd);
+                BDDConfig info = new(bdd, utilisateur, mdp);
                 PersistanceSQL donnees = new(bdd, info); // exception si echec de connexion
                 return donnees;
             }
@@ -39,9 +39,25 @@ namespace CashcashApp
             }
         }
 
-        public static void AfficherErreurBDD(string bdd)
+        public static void AfficherErreurBDD(string bdd, Exception ex)
         {
-            string message = $"Echec de la connexion à la BDD {bdd}.";
+            string message;
+            if (bdd == "MySQL")
+                switch (ex.Source)
+                {
+                    case "System.Private.CoreLib":
+                        message = "Vérifiez que XAMPP, Apache et MySQL soient allumés.";
+                        break;
+                    case "MySql.Data":
+                        message = "Utilisateur ou mot de passe incorrect.";
+                        break;
+                    default:
+                        message = "Erreur critique";
+                        break;
+                }
+            else
+                message = "PostgreSQL n'est pas encore implémenté";
+
             string titre = "Impossible de se connecter";
             MessageBoxButton boutons = MessageBoxButton.OK;
             MessageBoxImage icone = MessageBoxImage.Error;

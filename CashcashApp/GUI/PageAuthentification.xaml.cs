@@ -43,17 +43,16 @@ namespace CashcashApp
             string bdd = cbBdd.SelectedItem.ToString()!; // ! spécifie que le résultat ne sera pas null
             try
             {
-                var persistance = Util.NouvelleConnexionBDD(bdd);
-                if (persistance.TesterConnexion() == false)
-                    throw new Exception("Echec de la connexion");
+                var persistance = Util.NouvelleConnexionBDD(bdd, tbUtilisateur.Text, tbMdp.Text);
+                persistance.TesterConnexion();
                 //MessageBox.Show("Connexion réussie");
                 GestionMateriels gestion = new(persistance);
                 PageListeDesClients pageListeDesClients = new(main, gestion);
                 main.frame.Content = pageListeDesClients;
             }
-            catch
+            catch (Exception ex)
             {
-                Util.AfficherErreurBDD(bdd);
+                Util.AfficherErreurBDD(bdd, ex);
             }
             finally
             {
