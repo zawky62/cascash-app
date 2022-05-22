@@ -13,28 +13,24 @@ namespace CashcashApp
         public int Port { get; }
         public string Username { get; }
         public string Password { get; }
-        public BDDConfig(string bdd)
+        public BDDConfig(string bdd, string utilisateur, string mdp)
         {
             BDD = bdd;
             Host = "localhost";
             NomBaseDonnees = "cashcash";
+            Username= utilisateur;
+            Password=mdp;
 
             switch (bdd)
             {
                 case "MySQL":
                     Port = 3306;
-                    Username = "root";
-                    Password = "";
                     break;
                 case "PostgreSQL":
                     Port = 5432;
-                    Username = "postgres";
-                    Password = "";
                     break;
                 default:
                     Port = 0;
-                    Username = "";
-                    Password = "";
                     break;
             }
         }

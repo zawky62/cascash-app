@@ -27,17 +27,16 @@ namespace CashcashApp
             conn = new(connString.ToString());
         }
 
-        public bool TesterConnexion()
+        public void TesterConnexion()
         {
             try
             {
                 conn.Open();
                 conn.Close();
-                return true;
             }
             catch
             {
-                return false;
+                throw;
             }
         }
 
