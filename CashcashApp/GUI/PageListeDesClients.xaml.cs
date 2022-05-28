@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Windows;
@@ -40,7 +41,23 @@ namespace CashcashApp
 
         private void btnRelance_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("La relance n'est pas encore implémentée");
+            try
+            {
+                var client = (Client)dgClients.SelectedItem;
+                int delai = 30;
+                string relance = $"http://127.0.0.1/cashcash-web/index.php/admin/pdf/relance?id={client.Id}&delai={delai}";
+
+                var process = new ProcessStartInfo
+                {
+                    FileName = relance,
+                    UseShellExecute = true
+                };
+                Process.Start(process);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
 
