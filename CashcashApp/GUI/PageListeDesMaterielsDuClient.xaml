@@ -26,12 +26,14 @@
         <DataGrid AutoGenerateColumns="False" Name="dgMateriels" Grid.Row="1" HorizontalAlignment="Left">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Client" Binding="{ Binding Path=ClientRaisonSociale,Mode=OneWay}" />
-                <DataGridTextColumn Header="Matériel" Binding="{Binding Path=NumSerie,Mode=OneWay}" />
+                <DataGridTextColumn Header="N° Série" Binding="{Binding Path=NumSerie,Mode=OneWay}" />
+                <DataGridTextColumn Header="Matériel" Binding="{Binding Path=TypeLibelle,Mode=OneWay}" />
                 <DataGridTextColumn Header="Date vente" Binding="{Binding Path=DateVente,Mode=OneWay,StringFormat='{}{0:dd/MM/yyyy}'}" />
                 <DataGridTextColumn Header="Date installation" Binding="{Binding Path=DateInstall,Mode=OneWay,StringFormat='{}{0:dd/MM/yyyy}'}" />
                 <DataGridTextColumn Header="N° contrat" Binding="{Binding Path=ContratId, Mode=OneWay}" />
                 <DataGridTextColumn Header="Date signature" Binding="{Binding Path=ContratDateSign,Mode=OneWay,StringFormat='{}{0:dd/MM/yyyy}'}" />
                 <DataGridTextColumn Header="Date renouvellement" Binding="{Binding Path=ContratDateRenouv,Mode=OneWay,StringFormat='{}{0:dd/MM/yyyy}'}" />
+                <DataGridTextColumn Header="Jours restants" Binding="{Binding Path=JoursRestants,Mode=OneWay}" />
                 <DataGridTemplateColumn Header="Contrat" CellTemplate="{StaticResource BoutonDetailsContrat}"/>
             </DataGrid.Columns>
         </DataGrid>
