@@ -417,7 +417,7 @@ namespace CashcashApp
                     string? date_renouvellement = reponseSQL[7].ToString();
 
                     if (n_serie == null || reference == null || libelle == null || date_vente == null ||
-                        date_installation == null || prix_vente == null || emplacement == null)
+                        date_installation == null || prix_vente == null || emplacement == null || date_renouvellement == null)
                         throw new ArgumentNullException("Une ligne n'est pas conforme (valeur nulle)");
                     #endregion
 
@@ -428,10 +428,11 @@ namespace CashcashApp
                                                dateVente: Util.CreerDate(date_vente),
                                                dateInstall: Util.CreerDate(date_installation),
                                                prixVente: float.Parse(prix_vente),
-                                               emplacement: emplacement);
+                                               emplacement: emplacement,
+                                               contratDateRenouv: date_renouvellement!.Length != 0 ? Util.CreerDate(date_renouvellement) : null);
                     #endregion
 
-                    if (materiel.JoursRestants() > 0)
+                    if (materiel.JoursRestants > 0)
                     {
                         // si le matériel est sous contrat, l'ajouter au xml
                         xmlMateriels.Append(materiel.XmlMateriel());

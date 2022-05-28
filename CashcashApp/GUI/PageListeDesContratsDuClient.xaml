@@ -17,7 +17,6 @@
 
         <Grid Grid.Row="0">
             <TextBlock Name="tbTitre" Text="Choix du contrat pour le matériel " VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold"/>
-            <Button x:Name="btnRafraichir" Content="Rafraichir" Click="btnRafraichir_Click" Width="120" VerticalAlignment="Center" Margin="15,0,0,0" HorizontalAlignment="Right"/>
         </Grid>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1">

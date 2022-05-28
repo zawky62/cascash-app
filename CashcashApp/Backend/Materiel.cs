@@ -24,6 +24,7 @@ namespace CashcashApp
         public int? ContratId { get; }
         public DateTime? ContratDateSign { get; }
         public DateTime? ContratDateRenouv { get; }
+        public int JoursRestants { get { return GetJoursRestants(); } }
 
         public Materiel(string numSerie, DateTime? dateVente = null, DateTime? dateInstall = null, float? prixVente = null,
             string? emplacement = null, string? typeReference = null, string? typeLibelle = null, int? clientId = null,
@@ -43,11 +44,11 @@ namespace CashcashApp
             ContratDateRenouv = contratDateRenouv;
         }
 
-        public int JoursRestants()
+        public int GetJoursRestants()
         {
-            if (ContratDateRenouv == null)
+            if (this.ContratDateRenouv == null)
                 return 0;
-            DateTime echeance = ContratDateRenouv.Value.AddYears(1);
+            DateTime echeance = this.ContratDateRenouv.Value.AddYears(1);
             return (int)echeance.Subtract(DateTime.Now).TotalDays;
         }
 
@@ -62,11 +63,8 @@ namespace CashcashApp
             xml.Append($"<prix_vente>{PrixVente}</prix_vente>");
             xml.Append($"<emplacement>\"{Emplacement}\"</emplacement>");
 
-            int joursRestants = JoursRestants();
-            if (joursRestants > 0)
-            {
-                xml.Append($"<nbJourAvantEcheance>{joursRestants}</nbJourAvantEcheance>");
-            }
+            if(JoursRestants > 0)
+                xml.Append($"<nbJourAvantEcheance>{JoursRestants}</nbJourAvantEcheance>");
 
             xml.Append("</materiel>");
 
