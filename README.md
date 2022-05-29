@@ -1,7 +1,6 @@
 Reste à faire :
 
    C# :
-      - Génération du PDF
       - Tests unitaires
       - Documentation
    
