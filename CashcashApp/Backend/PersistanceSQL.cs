@@ -21,9 +21,9 @@ namespace CashcashApp
             StringBuilder connString = new();
             connString.Append($"Server={info.Host};");
             connString.Append($"Database={info.NomBaseDonnees};");
-            connString.Append($"port={info.Port};");
+            connString.Append($"Port={info.Port};");
             connString.Append($"User Id={info.Username};");
-            connString.Append($"password={info.Password};");
+            connString.Append($"Password={info.Password};");
             conn = new(connString.ToString());
         }
 

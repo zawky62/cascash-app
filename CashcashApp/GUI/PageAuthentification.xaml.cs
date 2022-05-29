@@ -43,7 +43,7 @@ namespace CashcashApp
             string bdd = cbBdd.SelectedItem.ToString()!; // ! spécifie que le résultat ne sera pas null
             try
             {
-                var persistance = Util.NouvelleConnexionBDD(bdd, tbUtilisateur.Text, tbMdp.Text);
+                var persistance = Util.NouvelleConnexionBDD(bdd, tbUtilisateur.Text, tbMdp.Password);
                 persistance.TesterConnexion();
                 //MessageBox.Show("Connexion réussie");
                 GestionMateriels gestion = new(persistance);

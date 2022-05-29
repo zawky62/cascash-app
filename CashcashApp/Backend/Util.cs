@@ -58,6 +58,8 @@ namespace CashcashApp
             else
                 message = "PostgreSQL n'est pas encore implémenté";
 
+            message += $"\n{ex.Message}";
+
             string titre = "Impossible de se connecter";
             MessageBoxButton boutons = MessageBoxButton.OK;
             MessageBoxImage icone = MessageBoxImage.Error;
