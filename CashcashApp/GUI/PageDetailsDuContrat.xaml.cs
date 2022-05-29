@@ -19,13 +19,13 @@ namespace CashcashApp
             this.main = main;
             this.gestion = gestion;
             this.materiel = materiel;
+            if (materiel.ContratId == null)
+                throw new ArgumentNullException("Pas de contrat valide");
+            tbTitre.Text += $"{materiel.ContratId.Value}";
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if (materiel.ContratId == null)
-                throw new ArgumentNullException("Pas de contrat valide");
-
             if (materiel.ContratDateSign == null || materiel.ContratDateRenouv == null)
                 throw new ArgumentNullException("Une date n'est pas renseignée dans le contrat");
 
@@ -33,7 +33,6 @@ namespace CashcashApp
                 throw new ArgumentNullException("Le client n'est pas valide");
 
             tbClient.Text = $"{materiel.ClientRaisonSociale}";
-            tbContratId.Text = $"{materiel.ContratId.Value}";
             tbDateSign.Text = $"{materiel.ContratDateSign.Value:dd/MM/yyyy}";
             tbDateRenouv.Text = $"{materiel.ContratDateRenouv.Value:dd/MM/yyyy}";
 
